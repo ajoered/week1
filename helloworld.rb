@@ -17,3 +17,5 @@ favorites = { food: "pizza", sport: "bjj", music: "punk" }
 favorites.each_with_index do |(key, value), index|
   puts "Fave item #{index+1}: My fave #{key.to_s} is #{value}"
 end
+
+#hello
