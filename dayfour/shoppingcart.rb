@@ -1,70 +1,56 @@
 class ShoppingCart
+	attr_accessor :shopping_list, :price_list
 	def initialize
-		@contents = {}
+		@shopping_list = {}
+		@price_list = {
+			apple: 10,
+			oranges: 5,
+			grapes: 15,
+			banana: 20,
+			watermelon: 50
+		}
 	end
 
-	def add_to_cart(k, v)
-		@contents.push(item)
+	def add_to_cart(key)
+		@shopping_list[key] ||= 0
+		@shopping_list[key] += 1
 	end
-
 
 	def show
-		@contents.each do |k, v|
-				puts "#{k}: #{v}$"
-			end
+		@shopping_list.each do |k, v|
+			puts "#{v} #{k}:" + " #{@price_list[k]*v}"
+		end
 	end
-
-	class Dictionary
-  def initialize
-    @hash = {}
-  end
-
-  def add(defs)
-    defs.each do |word, definition|
-      @hash[word] = definition
-    end
-  end
-end
 
 	def cost
-		value_array = []
-		@contents.each do |item|
-			item.each do |k, v|
-				value_array << v
-			end
+		total = 0
+		@shopping_list.each do |k, v|
+			total += @price_list[k]*v
 		end
-		total = value_array.reduce(0) do |sum, n|
-			sum + n
-		end
-		puts total
-	end
-
-	def count_hash
-			@count_hash = Hash.new(0)
-			@contents.each do |item|
-				item.each do |k, v|
-					@count_hash[k] += 1
-					end
-				end
-			puts @count_hash
+		puts "Your total is #{total}"
 	end
 end
 
 
-class Item
-	def self.new_item(hash)
-		@hash = hash
-	end
-end
+
 
 cart = ShoppingCart.new
-cart.add_to_cart(Apple: 10)
-cart.add_to_cart(Apple: 10)
-cart.add_to_cart(Oranges: 5)
-cart.add_to_cart(Grapes: 15)
-cart.add_to_cart(Bananas: 20)
-cart.add_to_cart(Watermelons: 50)
+cart.add_to_cart :apple
+cart.add_to_cart :apple
+# cart.add_to_cart :oranges
+# cart.add_to_cart :grapes
+cart.add_to_cart :banana
+# cart.add_to_cart :watermelon
 
+cart.show
+cart.cost
+# cart.count_hash
+
+# class Item
+# 	def self.new_item(hash)
+# 		@hash = hash
+# 	end
+# end
 
 # cart.add_to_cart(Item.new_item(Apple: 10))
 # cart.add_to_cart(Item.new_item(Apple: 10))
@@ -72,6 +58,25 @@ cart.add_to_cart(Watermelons: 50)
 # cart.add_to_cart(Item.new_item(Grapes: 15))
 # cart.add_to_cart(Item.new_item(Bananas: 20))
 # cart.add_to_cart(Item.new_item(Watermelons: 50))
-cart.show
-cart.cost
-cart.count_hash
+
+# 	def cost
+# 		value_array = []
+# 		@contents.each do |k, v|
+# 				value_array << v
+# 			end
+# 		total = value_array.reduce(0) do |sum, n|
+# 			sum + n
+# 		end
+# 		puts total
+# 	end
+
+# 	def count_hash
+# 		@count_hash = Hash.new(0)
+# 		@contents.each do |k, v|
+# 			@count_hash[k] += 1
+# 		end
+# 		puts @count_hash
+# 	end
+	
+# end
+
